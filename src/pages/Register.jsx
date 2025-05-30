@@ -55,7 +55,9 @@ const Register = () => {
       !formData.profilePicture ||
       formData.categories.length === 0
     ) {
-      setError('Mohon lengkapi semua data dan pilih kategori serta foto profil.');
+      setError(
+        'Mohon lengkapi semua data dan pilih kategori serta foto profil.'
+      );
       return;
     }
 
@@ -73,10 +75,9 @@ const Register = () => {
 
     register(data)
       .then((res) => {
-        localStorage.setItem('token', res.data.token);
         setError(null);
         setLoading(false);
-        window.location.href = '/login';
+        window.location.href = '/login'; // langsung ke halaman login
       })
       .catch((err) => {
         console.error(err);
