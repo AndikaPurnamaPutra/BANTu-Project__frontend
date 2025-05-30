@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -189,11 +189,7 @@ const PortfolioUpload = () => {
         },
       };
 
-      const response = await axios.post(
-        'http://localhost:3000/api/portfolios',
-        formData,
-        config
-      );
+      const response = await api.post('/portfolios', formData, config);
 
       alert('Portfolio berhasil diunggah!');
       setUploadedMediaUrls(response.data.media || []);

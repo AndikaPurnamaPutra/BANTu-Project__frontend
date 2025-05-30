@@ -240,12 +240,12 @@ const ManagePortfolios = () => {
         <h1 className="text-3xl font-medium text-gray-800">
           Manage Portfolios
         </h1>
-        <button
+        {/* <button
           onClick={openAddModal}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           + Add Portfolio
-        </button>
+        </button> */}
       </div>
 
       <div className="mb-4 w-full flex space-x-4">
@@ -460,7 +460,7 @@ const PortfolioForm = ({
         className="w-full border px-3 py-2 rounded"
       />
     </div>
-    <div>
+    {/* <div>
       <label className="block mb-1">
         Upload Media {isEditing ? '(Optional)' : '(Required)'}
       </label>
@@ -485,7 +485,7 @@ const PortfolioForm = ({
             />
           ))}
         </div>
-      )}
+      )} */}
   </>
 );
 

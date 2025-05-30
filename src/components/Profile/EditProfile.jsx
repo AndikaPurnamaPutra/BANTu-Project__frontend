@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api'; // Import axios instance with base URL and interceptors
 
 const EditProfile = () => {
   const location = useLocation();
@@ -79,11 +79,7 @@ const EditProfile = () => {
           'Content-Type': 'application/json',
         },
       };
-      const response = await axios.put(
-        'http://localhost:3000/api/users/profile',
-        payload,
-        config
-      );
+      const response = await api.put('/users/profile', payload);
       return response.data;
     } catch (err) {
       console.error('Response error:', err.response?.data);
@@ -105,11 +101,7 @@ const EditProfile = () => {
           'Content-Type': 'multipart/form-data',
         },
       };
-      const response = await axios.put(
-        'http://localhost:3000/api/users/profile-pic',
-        formData,
-        config
-      );
+      const response = await api.put('/users/profile-pic', formData, config);
       return response.data;
     } catch (err) {
       throw err;

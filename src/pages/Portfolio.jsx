@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PortfolioTabs from '../components/Portfolio/PortfolioTabs';
 import PortfolioItem from '../components/Portfolio/PortfolioItem';
-import axios from 'axios';
+import api from '../services/api';
 
 const Portfolio = () => {
   // Default 'all' lowercase supaya konsisten dengan kategori di tabs
@@ -15,12 +15,11 @@ const Portfolio = () => {
   // Ambil data portofolio dari backend sekali saat mount
   useEffect(() => {
     const fetchPortfolios = async () => {
+      console.log('Backend base URL:', import.meta.env.VITE_API_BASE_URL);
       setIsLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:3000/api/portfolios', {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
+        const res = await api.get('/portfolios');
         setPortfolioData(res.data);
         setError(null);
       } catch (err) {
@@ -118,7 +117,11 @@ const Portfolio = () => {
                 <PortfolioItem
                   key={item._id}
                   id={item._id}
-                  image={item.media && item.media.length > 0 ? item.media[0] : 'defaultPortfolioImg.jpg'}
+                  image={
+                    item.media && item.media.length > 0
+                      ? item.media[0]
+                      : 'defaultPortfolioImg.jpg'
+                  }
                   title={item.title}
                   author={
                     item.creatorID?.firstName ||

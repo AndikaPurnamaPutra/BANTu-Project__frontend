@@ -191,12 +191,12 @@ const ManageUsers = () => {
                 >
                   Edit
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleResetPassword(user._id)}
                   className="text-yellow-600 hover:text-yellow-800"
                 >
                   Reset Password
-                </button>
+                </button> */}
                 <button
                   onClick={() => handleDelete(user._id)}
                   className="text-red-600 hover:text-red-800"

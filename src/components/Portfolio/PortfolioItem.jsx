@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
 
 const PortfolioItem = ({
   id,
@@ -33,11 +33,9 @@ const PortfolioItem = ({
         return;
       }
 
-      const res = await axios.put(
-        `http://localhost:3000/api/portfolios/${id}/like`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await api.put(`/portfolios/${id}/like`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
       // Sinkronisasi state dengan response dari backend
       setIsLiked(res.data.liked);

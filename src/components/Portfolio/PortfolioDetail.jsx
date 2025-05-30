@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import Button from '../Ui/Button';
 
 const PortfolioDetail = () => {
@@ -20,12 +20,9 @@ const PortfolioDetail = () => {
     const fetchPortfolio = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(
-          `http://localhost:3000/api/portfolios/${id}`,
-          {
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-          }
-        );
+        const res = await api.get(`/portfolios/${id}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
         setItem(res.data);
         setMainImage(
           res.data.media && res.data.media.length > 0
