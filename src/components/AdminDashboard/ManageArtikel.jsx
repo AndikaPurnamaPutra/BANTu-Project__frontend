@@ -366,6 +366,7 @@ const ManageArtikel = () => {
       });
 
       await api.put(`/artikels/${editArtikel._id}`, data);
+      console.log('Response after upload:', response.data);
 
       alert('Artikel berhasil diupdate');
       closeEditModal();
@@ -408,6 +409,7 @@ const ManageArtikel = () => {
       });
 
       await api.post('/artikels', data);
+      console.log('Response after upload:', response.data);
 
       alert('Artikel berhasil ditambahkan');
       closeAddModal();
