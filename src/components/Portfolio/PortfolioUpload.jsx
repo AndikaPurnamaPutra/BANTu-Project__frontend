@@ -62,8 +62,9 @@ const PortfolioUpload = () => {
     extensions: [StarterKit, Underline, Link],
     content: description,
     onUpdate: ({ editor }) => {
-      setDescription(editor.getHTML());
-      checkFormValidity(title, html, selectedCategory, mainFile);
+      const updatedDescription = editor.getHTML();
+      setDescription(updatedDescription);
+      checkFormValidity(title, updatedDescription, selectedCategory, mainFile);
     },
   });
 
