@@ -277,6 +277,21 @@ const ManageArtikel = () => {
     }
   };
 
+  const editor = useEditor({
+    extensions: [StarterKit, Underline, Link], // jangan pakai Code karena sudah termasuk StarterKit
+    content: formData.content,
+    onUpdate: ({ editor }) => {
+      setFormData((prev) => ({ ...prev, content: editor.getHTML() }));
+    },
+  });
+
+  // Sinkronisasi konten editor setiap kali formData.content berubah
+  useEffect(() => {
+    if (editor && formData.content !== editor.getHTML()) {
+      editor.commands.setContent(formData.content);
+    }
+  }, [formData.content, editor]);
+
   const openEditModal = (artikel) => {
     setEditArtikel(artikel);
     setFormData({
@@ -322,14 +337,6 @@ const ManageArtikel = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const editor = useEditor({
-    extensions: [StarterKit, Underline, Link], // jangan pakai Code karena sudah termasuk StarterKit
-    content: formData.content,
-    onUpdate: ({ editor }) => {
-      setFormData((prev) => ({ ...prev, content: editor.getHTML() }));
-    },
-  });
-
   const handleFileChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -357,16 +364,7 @@ const ManageArtikel = () => {
         data.append('coverImage', formData.newCoverImage);
       }
 
-      console.log('Uploading data:', {
-        title: formData.title,
-        content: formData.content,
-        category: formData.category,
-        tags: formData.tags,
-        newCoverImage: formData.newCoverImage,
-      });
-
       await api.put(`/artikels/${editArtikel._id}`, data);
-      console.log('Response after upload:', response.data);
 
       alert('Artikel berhasil diupdate');
       closeEditModal();
@@ -400,16 +398,7 @@ const ManageArtikel = () => {
       );
       data.append('coverImage', formData.newCoverImage);
 
-      console.log('Uploading data:', {
-        title: formData.title,
-        content: formData.content,
-        category: formData.category,
-        tags: formData.tags,
-        newCoverImage: formData.newCoverImage,
-      });
-
       await api.post('/artikels', data);
-      console.log('Response after upload:', response.data);
 
       alert('Artikel berhasil ditambahkan');
       closeAddModal();
@@ -422,7 +411,8 @@ const ManageArtikel = () => {
   const filteredArtikels = artikels.filter(
     (a) =>
       a.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (formData.category === '' || a.category.toLowerCase() === formData.category.toLowerCase())
+      (formData.category === '' ||
+        a.category.toLowerCase() === formData.category.toLowerCase())
   );
 
   const totalItems = filteredArtikels.length;
@@ -488,6 +478,7 @@ const ManageArtikel = () => {
           <tr>
             <th className="py-3 px-6 border-b">Title</th>
             <th className="py-3 px-6 border-b">Category</th>
+            <th className="py-3 px-6 border-b">Description</th>
             <th className="py-3 px-6 border-b">Tags</th>
             <th className="py-3 px-6 border-b">Cover Image</th>
             <th className="py-3 px-6 border-b">Actions</th>
@@ -499,6 +490,9 @@ const ManageArtikel = () => {
               <td className="py-3 px-6 border-b">{artikel.title}</td>
               <td className="py-3 px-6 border-b capitalize">
                 {artikel.category}
+              </td>
+              <td className="py-3 px-6 border-b max-w-xs overflow-hidden text-ellipsis whitespace-nowrap  line-clamp-3">
+                <div dangerouslySetInnerHTML={{ __html: artikel.content }} />
               </td>
               <td className="py-3 px-6 border-b">
                 {(artikel.tags || []).join(', ') || '-'}
