@@ -63,6 +63,7 @@ const PortfolioUpload = () => {
     content: description,
     onUpdate: ({ editor }) => {
       setDescription(editor.getHTML());
+      checkFormValidity(title, html, selectedCategory, mainFile);
     },
   });
 
