@@ -1,7 +1,7 @@
 import ImageCard1 from '../assets/images/tim-card1.png';
 import ImageCard2 from '../assets/images/tim-card2.png';
 import ImageCard3 from '../assets/images/tim-card3.png';
-import HeroOrnamen2 from "../assets/images/hero-ornamen-2.svg";
+import HeroOrnamen2 from '../assets/images/hero-ornamen-2.svg';
 
 const Aboutus = () => {
   return (
@@ -33,12 +33,16 @@ const Aboutus = () => {
               </p>
             </div>
           </div>
-          <div className='absolute top-0 left-0 right-0 bottom-0 z-0'>
-            <div className='w-[197px] h-[216px] bg-[#6F96D1] absolute top-[130px] right-[199px]'>
-              <div className='w-[174px] h-[174px] bg-[#DCF343] absolute top-[-99px] right-[-99px]'></div>
-              <img src={HeroOrnamen2} alt="Hero Ornament 2" className="w-[113px] h-[113px] object-cover absolute top-[-57px] left-[-57px]" />
+          <div className="absolute top-0 left-0 right-0 bottom-0 z-0">
+            <div className="w-[197px] h-[216px] bg-[#6F96D1] absolute top-[130px] right-[199px]">
+              <div className="w-[174px] h-[174px] bg-[#DCF343] absolute top-[-99px] right-[-99px]"></div>
+              <img
+                src={HeroOrnamen2}
+                alt="Hero Ornament 2"
+                className="w-[113px] h-[113px] object-cover absolute top-[-57px] left-[-57px]"
+              />
             </div>
-            <div className='w-[447px] h-[447px] bg-[#DCF343] rounded-full absolute left-[-239px] top-[60%] transform translate-y-[-50%]'></div>
+            <div className="w-[447px] h-[447px] bg-[#DCF343] rounded-full absolute left-[-239px] top-[60%] transform translate-y-[-50%]"></div>
           </div>
         </div>
       </section>
@@ -57,7 +61,7 @@ const Aboutus = () => {
                 />
                 <div className="flex flex-col gap-0.5 items-center">
                   <h3 className=" font-Parkinsans font-[500] text-(--blue) text-[32px] leading-[150%]">
-                    Ifa
+                    Ifa Bilqiis
                   </h3>
                   <span className="text-[18px] leading-[180%] font-[300] text-[#7F909F]">
                     Project Manager
@@ -74,7 +78,7 @@ const Aboutus = () => {
                 </div>
                 <div className="flex flex-col gap-0.5 items-center">
                   <h3 className=" font-Parkinsans font-[500] text-(--blue) text-[32px] leading-[150%]">
-                    Ifa
+                    Fauziah Kesya
                   </h3>
                   <span className="text-[18px] leading-[180%] font-[300] text-[#7F909F]">
                     Project Manager
