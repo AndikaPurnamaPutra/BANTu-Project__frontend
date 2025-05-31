@@ -6,7 +6,6 @@ import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
 import api from '../../services/api';
 
-
 const categoriesList = [
   'Copywriter',
   'Branding',
@@ -22,8 +21,6 @@ const categoriesList = [
   'Social Media Design',
   'Design Manager',
 ];
-
-const BASE_URL = 'http://localhost:3000';
 
 const buttonBaseClass = `px-3 py-1 rounded border focus:outline-none transition`;
 const activeClass = `bg-blue-600 text-white border-blue-600`;
@@ -360,9 +357,15 @@ const ManageArtikel = () => {
         data.append('coverImage', formData.newCoverImage);
       }
 
-      await api.put(`/artikels/${editArtikel._id}`, data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      console.log('Uploading data:', {
+        title: formData.title,
+        content: formData.content,
+        category: formData.category,
+        tags: formData.tags,
+        newCoverImage: formData.newCoverImage,
       });
+
+      await api.put(`/artikels/${editArtikel._id}`, data);
 
       alert('Artikel berhasil diupdate');
       closeEditModal();
@@ -396,9 +399,15 @@ const ManageArtikel = () => {
       );
       data.append('coverImage', formData.newCoverImage);
 
-      await api.post('/artikels', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      console.log('Uploading data:', {
+        title: formData.title,
+        content: formData.content,
+        category: formData.category,
+        tags: formData.tags,
+        newCoverImage: formData.newCoverImage,
       });
+
+      await api.post('/artikels', data);
 
       alert('Artikel berhasil ditambahkan');
       closeAddModal();
@@ -411,7 +420,7 @@ const ManageArtikel = () => {
   const filteredArtikels = artikels.filter(
     (a) =>
       a.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (formData.category === '' || a.category === formData.category)
+      (formData.category === '' || a.category.toLowerCase() === formData.category.toLowerCase())
   );
 
   const totalItems = filteredArtikels.length;
@@ -465,7 +474,7 @@ const ManageArtikel = () => {
         >
           <option value="">All Categories</option>
           {categoriesList.map((cat) => (
-            <option key={cat} value={cat.toLowerCase()}>
+            <option key={cat} value={cat}>
               {cat}
             </option>
           ))}
@@ -614,7 +623,7 @@ const ArtikelForm = ({
       >
         <option value="">-- Select Category --</option>
         {categoriesList.map((cat) => (
-          <option key={cat} value={cat.toLowerCase()}>
+          <option key={cat} value={cat}>
             {cat}
           </option>
         ))}
