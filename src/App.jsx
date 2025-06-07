@@ -30,18 +30,21 @@ import ManageJob from './components/AdminDashboard/ManageJob';
 import ManageForum from './components/AdminDashboard/ManageForum';
 import ManageEvent from './components/AdminDashboard/ManageEvent';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
+
 function App() {
   const location = useLocation();
   const state = location.state;
 
-  // Menentukan apakah saat ini berada di halaman Login
-  const isLoginPage =
-    location.pathname === '/login' || location.pathname === '/register';
+  // Menentukan apakah saat ini berada di halaman Login, Register, atau Admin
+  const isAuthOrAdminPage =
+    location.pathname.startsWith('/login') ||
+    location.pathname.startsWith('/register') ||
+    location.pathname.startsWith('/admin');
 
   return (
     <>
-      {/* Navbar dan Footer hanya ditampilkan jika bukan halaman login */}
-      {!isLoginPage && <Navbar />}
+      {/* Navbar dan Footer hanya ditampilkan jika bukan halaman auth / admin */}
+      {!isAuthOrAdminPage && <Navbar />}
 
       {/* Base routes */}
       <Routes location={state?.backgroundLocation || location}>
@@ -60,17 +63,15 @@ function App() {
         <Route path="/job-detail/:id" element={<JobDetail />} />
         <Route path="/event" element={<Event />} />
         <Route path="/about-us" element={<Aboutus />} />
-        <Route path="/login" element={<Login />} /> {/* Route untuk Login */}
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} /> {/* Profile route */}
-        <Route path="/profile/:id" element={<Profile />} />{' '}
-        {/* Profile route */}
-        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/portfolio/:id" element={<PortfolioDetail />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/portfolio-upload" element={<PortfolioUpload />} />{' '}
-        {/* Portfolio Upload route */}
-        {/* Route untuk dashboard admin yang diproteksi */}
+        <Route path="/portfolio-upload" element={<PortfolioUpload />} />
+
+        {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
         <Route
@@ -138,8 +139,8 @@ function App() {
         </Routes>
       )}
 
-      {/* Footer hanya ditampilkan jika bukan halaman login */}
-      {!isLoginPage && <Footer />}
+      {/* Footer hanya ditampilkan jika bukan halaman auth / admin */}
+      {!isAuthOrAdminPage && <Footer />}
     </>
   );
 }
