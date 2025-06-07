@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ArticleDecoration from '../assets/images/Article_decorationTitle.svg';
 import ArticleItem from '../components/Article/ArticleItem';
 import { fetchArticles } from '../services/articleService';
 

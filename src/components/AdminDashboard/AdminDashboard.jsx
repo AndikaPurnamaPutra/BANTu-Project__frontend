@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     articles: 0,
     forums: 0, // Sesuaikan properti 'forums' sesuai backend
     portfolios: 0,
-    projects: 0,
+    lokers: 0,
     events: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
             {adminProfile && (
               <div className="text-gray-700">
                 Logged in as:{' '}
-                <strong>{adminProfile.username || adminProfile.email}</strong>
+                <strong>{adminProfile.adminUsername || adminProfile.adminEmail}</strong>
               </div>
             )}
             <button
@@ -92,7 +92,7 @@ const AdminDashboard = () => {
           <StatCard title="Users" count={stats.users} colorClass="" />
           <StatCard title="Articles" count={stats.articles} colorClass="" />
           <StatCard title="Portfolios" count={stats.portfolios} colorClass="" />
-          <StatCard title="Projects" count={stats.projects} colorClass="" />
+          <StatCard title="Lokers" count={stats.lokers} colorClass="" />
           <StatCard title="Events" count={stats.events} colorClass="" />
           <StatCard
             title="Forums"
